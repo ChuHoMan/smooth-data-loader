@@ -1,0 +1,21 @@
+{
+    "name": "@smooth-data-loader/runtime-core",
+    "version": "1.0.0",
+    "description": "",
+    "exports": {
+      ".": {
+        "dev": "./src/index.ts",
+        "default": "./dist/esm/router/index.js"
+      }
+    },
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "ChuHoMan",
+    "license": "ISC",
+    "peerDependencies": {
+    },
+    "devDependencies": {
+    }
+  }

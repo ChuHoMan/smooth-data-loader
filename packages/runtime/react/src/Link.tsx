@@ -1,0 +1,65 @@
+import { forwardRef, memo } from 'react';
+import { Link, LinkProps, useHref } from 'react-router-dom';
+import { usePrefetch } from './hooks/usePrefetch';
+import PrefetchPageLinks from './PrefetchPageLinks';
+
+/**
+ * Defines the prefetching behavior of the link:
+ *
+ * - "none": Never fetched
+ * - "intent": Fetched when the user focuses or hovers the link
+ * - "render": Fetched when the link is rendered
+ * - "viewport": Fetched when the link is in the viewport
+ */
+type PrefetchBehavior = 'intent' | 'render' | 'none' | 'viewport';
+
+export interface MisxLinkProps extends LinkProps {
+  prefetch?: PrefetchBehavior
+  prefetchOptions?: Record<string, any>
+}
+
+const ABSOLUTE_URL_REGEX = /^(?:[a-z][a-z0-9+.-]*:|\/\/)/i;
+
+function mergeRefs<T = any>(...refs: Array<React.MutableRefObject<T> | React.LegacyRef<T>>): React.RefCallback<T> {
+  return (value) => {
+    refs.forEach((ref) => {
+      if (typeof ref === 'function') {
+        ref(value);
+      } else if (ref != null) {
+        (ref as React.MutableRefObject<T | null>).current = value;
+      }
+    });
+  };
+}
+
+const MisxLink = forwardRef<HTMLAnchorElement, MisxLinkProps>((props, forwardedRef) => {
+  const { to, prefetch = 'none', prefetchOptions, ...restProps } = props;
+  const isAbsolute = typeof to === 'string' && ABSOLUTE_URL_REGEX.test(to);
+
+  const href = useHref(to);
+  const [shouldPrefetch, ref, prefetchHandler] = usePrefetch(prefetch, restProps);
+
+  console.log({
+    shouldPrefetch
+  })
+
+  return (
+    <>
+        <Link
+            {...restProps}
+            {...prefetchHandler}
+            ref={mergeRefs(forwardedRef, ref)}
+            to={to}
+        />
+        {
+            (shouldPrefetch && !isAbsolute)
+              ? <PrefetchPageLinks page={href} prefetchOptions={prefetchOptions} />
+              : null
+        }
+    </>
+  );
+});
+
+MisxLink.displayName = 'MisxLink';
+
+export default memo(MisxLink);

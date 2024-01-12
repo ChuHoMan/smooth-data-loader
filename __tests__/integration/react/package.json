@@ -1,0 +1,26 @@
+{
+    "private": true,
+    "name": "@integration-test/react",
+    "version": "0.0.1",
+    "scripts": {
+      "dev": "vite"
+    },
+    "engines": {
+      "node": ">=14.17.6"
+    },
+    "eslintIgnore": [
+      "node_modules/",
+      "dist/"
+    ],
+    "dependencies": {
+      "react": "^18",
+      "react-dom": "^18",
+      "react-router": "^6.21.1",
+      "react-router-dom": "^6.21.1"
+    },
+    "devDependencies": {
+      "@smooth-data-loader/runtime-react": "workspace:*",
+      "vite": "^5.0.9",
+      "@vitejs/plugin-react-swc": "^3.5.0"
+    }
+  }
