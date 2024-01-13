@@ -23,7 +23,7 @@ importers:
         specifier: ^8.56.0
         version: 8.56.0
       lerna:
-        specifier: '7'
+        specifier: ^7.4.2
         version: 7.4.2
       typescript:
         specifier: ^5.3.3

@@ -11,7 +11,7 @@
     "lint": "eslint .  --cache",
     "build": "pnpm --filter \"@smooth-data-loader/*\" build",
     "lint:fix": "eslint . \"**/*.{ts,tsx,js,vue,json}\" --cache --fix",
-    "release": "lerna version --no-push --no-private --no-git-tag-version"
+    "release-dry-run": "lerna version --no-push --no-private --no-git-tag-version"
   },
   "devDependencies": {
     "@chuhoman/eslint-config": "^1.0.3",
