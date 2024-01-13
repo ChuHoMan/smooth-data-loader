@@ -2,9 +2,9 @@
   "name": "@smooth-data-loader/runtime-vue",
   "type": "module",
   "version": "0.0.0",
-  "description": "",
+  "description": "runtime vue for smooth-data-loader",
   "author": "ChuHoMan",
-  "license": "ISC",
+  "license": "MIT",
   "keywords": [],
   "exports": {
     ".": {

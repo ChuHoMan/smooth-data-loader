@@ -2,9 +2,9 @@
   "name": "@smooth-data-loader/runtime-react",
   "type": "module",
   "version": "0.0.0",
-  "description": "",
+  "description": "runtime react for smooth-data-loader",
   "author": "ChuHoMan",
-  "license": "ISC",
+  "license": "MIT",
   "keywords": [],
   "exports": {
     ".": {
