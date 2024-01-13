@@ -2,6 +2,9 @@
   "name": "@smooth-data-loader/runtime-react",
   "version": "1.0.0",
   "description": "",
+  "author": "ChuHoMan",
+  "license": "ISC",
+  "keywords": [],
   "exports": {
     ".": {
       "dev": "./src/index.ts",
@@ -11,9 +14,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "ChuHoMan",
-  "license": "ISC",
   "peerDependencies": {
   },
   "dependencies": {

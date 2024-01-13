@@ -1,14 +1,14 @@
 {
-    "extends": "../../../tsconfig.json",
-    "compilerOptions": {
-      "jsx": "react-jsx",
-      "lib": ["DOM", "DOM.Iterable", "ESNext"],
-      "baseUrl": "./",
-      "customConditions": ["dev"],
-      "declaration": false,
-      "paths": {
-        "@/*": ["src/*"]
-      }
+  "extends": "../../../tsconfig.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "baseUrl": "./",
+    "customConditions": ["dev"],
+    "paths": {
+      "@/*": ["src/*"]
     },
-    "include": ["src"]
-  }
+    "declaration": false
+  },
+  "include": ["src"]
+}

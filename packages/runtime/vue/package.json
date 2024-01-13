@@ -1,26 +1,26 @@
 {
-    "name": "@smooth-data-loader/runtime-vue",
-    "version": "1.0.0",
-    "description": "",
-    "exports": {
-      ".": {
-        "dev": "./src/index.ts",
-        "default": "./dist/esm/router/index.js"
-      }
-    },
-    "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "keywords": [],
-    "author": "ChuHoMan",
-    "license": "ISC",
-    "peerDependencies": {
-      "vue": ">= 3",
-      "vue-router": ">= 4"
-    },
-    "dependencies": {
-      "@smooth-data-loader/runtime-core": "workspace:*"
-    },
-    "devDependencies": {
+  "name": "@smooth-data-loader/runtime-vue",
+  "version": "1.0.0",
+  "description": "",
+  "author": "ChuHoMan",
+  "license": "ISC",
+  "keywords": [],
+  "exports": {
+    ".": {
+      "dev": "./src/index.ts",
+      "default": "./dist/esm/router/index.js"
     }
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "peerDependencies": {
+    "vue": ">= 3",
+    "vue-router": ">= 4"
+  },
+  "dependencies": {
+    "@smooth-data-loader/runtime-core": "workspace:*"
+  },
+  "devDependencies": {
   }
+}

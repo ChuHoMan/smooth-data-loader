@@ -40,18 +40,18 @@ const MisxLink = forwardRef<HTMLAnchorElement, MisxLinkProps>((props, forwardedR
   const [shouldPrefetch, ref, prefetchHandler] = usePrefetch(prefetch, restProps);
 
   console.log({
-    shouldPrefetch
-  })
+    shouldPrefetch,
+  });
 
   return (
     <>
-        <Link
-            {...restProps}
-            {...prefetchHandler}
-            ref={mergeRefs(forwardedRef, ref)}
-            to={to}
-        />
-        {
+      <Link
+        {...restProps}
+        {...prefetchHandler}
+        ref={mergeRefs(forwardedRef, ref)}
+        to={to}
+      />
+      {
             (shouldPrefetch && !isAbsolute)
               ? <PrefetchPageLinks page={href} prefetchOptions={prefetchOptions} />
               : null

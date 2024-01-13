@@ -1,5 +1,5 @@
 import { FocusEventHandler, MouseEventHandler, TouchEventHandler, useEffect, useRef, useState } from 'react';
-import { intersectionObserver } from '@smooth-data-loader/runtime-core'
+import { intersectionObserver } from '@smooth-data-loader/runtime-core';
 
 /**
  * Defines the prefetching behavior of the link:
@@ -69,12 +69,12 @@ export function usePrefetch<T extends HTMLAnchorElement>(
         });
       };
 
-      let stopObserver = () => {}
+      let stopObserver = () => {};
 
-      if(ref.current) {
-        const { stop } = intersectionObserver(ref.current, callback, intersectConfig)
+      if (ref.current) {
+        const { stop } = intersectionObserver(ref.current, callback, intersectConfig);
 
-        stopObserver = stop
+        stopObserver = stop;
       }
 
       return () => {

@@ -1,16 +1,19 @@
 <script setup lang="ts">
-import { MisxLink } from '@smooth-data-loader/runtime-vue'
-
+import { MisxLink } from '@smooth-data-loader/runtime-vue';
 </script>
 
 <template>
   <nav>
     <ul>
       <li style="height: 100vh;">
-        <MisxLink to="/"> root </MisxLink>
+        <misx-link to="/">
+          root
+        </misx-link>
       </li>
       <li>
-        <MisxLink to="/user" prefetch="viewport"> user </MisxLink>
+        <misx-link to="/user" prefetch="viewport">
+          user
+        </misx-link>
       </li>
     </ul>
   </nav>

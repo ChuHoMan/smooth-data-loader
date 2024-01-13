@@ -1,6 +1,6 @@
 import { memo, useContext, useEffect, useMemo } from 'react';
 import { matchRoutes, useParams } from 'react-router-dom';
-import { UNSAFE_DataRouterContext } from 'react-router'
+import { UNSAFE_DataRouterContext } from 'react-router';
 import { preload } from 'swr';
 
 type Primitive = null | undefined | string | number | boolean | symbol | bigint;
@@ -199,15 +199,14 @@ function PrefetchPageLinks({
   page,
   prefetchOptions = {},
   ...dataLinkProps
-}: PrefetchPageDescriptor & { prefetchOptions: Record<string, any>}) {
-  const { prefetchChunks } = prefetchOptions
-  const dataRouter = useContext(UNSAFE_DataRouterContext)
+}: PrefetchPageDescriptor & { prefetchOptions: Record<string, any> }) {
+  const { prefetchChunks } = prefetchOptions;
+  const dataRouter = useContext(UNSAFE_DataRouterContext);
 
   const matches = useMemo(
-    () => matchRoutes(dataRouter?.router.routes!, page, dataRouter?.basename),
+    () => matchRoutes(dataRouter?.router.routes as any, page, dataRouter?.basename),
     [page, dataRouter?.basename, dataRouter?.router.routes],
   );
-  
 
   if (!matches) {
     console.warn(`Tried to prefetch ${page} but no routes matched.`);
@@ -216,21 +215,21 @@ function PrefetchPageLinks({
 
   useEffect(() => {
     if (matchRoute?.route?.path) {
-      console.log(matchRoute)
+      console.log(matchRoute);
 
-      matchRoute.route?.lazy?.().then(mod => {
+      matchRoute.route?.lazy?.().then((mod) => {
         // TODO: ts
-        const { swrData } = mod as any
-        preload(swrData.key, swrData.fetcher)
-      })
+        const { swrData } = mod as any;
+        preload(swrData.key, swrData.fetcher);
+      });
     }
-  }, [matchRoute?.route?.path]);
+  }, [matchRoute]);
 
   // TODO: allow user pass link
   // const dataHrefs: string[] = [
   // ];
   return (
-      <>
+    <>
       {/* {dataHrefs.map((href: string) => (
         <link key={href} rel="preload" as="fetch" href={href} crossOrigin="use-credentials" {...dataLinkProps} />
       ))} */}

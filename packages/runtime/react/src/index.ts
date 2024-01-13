@@ -1,23 +1,22 @@
-import Link from './Link'
-import { useLoaderData} from 'react-router'
-import useSWR from 'swr'
+import { useLoaderData } from 'react-router';
+import useSWR from 'swr';
+import Link from './Link';
 
 export {
-  useSWR
-}
+  useSWR,
+};
 
 export {
-    useLoaderData,
-    Link as MisxLink
-}
+  useLoaderData,
+  Link as MisxLink,
+};
 
 export {
-    defineLoader,
-    useLoaderSWR
-} from './utils'
+  defineLoader,
+  useLoaderSWR,
+} from './utils';
 
-
-export { preload } from 'swr'
+export { preload } from 'swr';
 
 // export function createResourceLoader({
 //     prefetchChunks,
@@ -33,7 +32,7 @@ export { preload } from 'swr'
 //             // if (toPrefetch.size < limit) {
 //             //   toAdd(() => {
 //                 // prefetchChunks ?
-//                   prefetchChunks(entry, params) 
+//                   prefetchChunks(entry, params)
 //                 //   :
 //                 //   prefetchHandler(entry.href);
 //             //   });
@@ -41,7 +40,7 @@ export { preload } from 'swr'
 //           }
 //         });
 //       });
-    
+
 //       timeoutFn(() => {
 //         // Find all links & Connect them to IO if allowed
 //         document.querySelectorAll('a').forEach(link => {

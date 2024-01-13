@@ -1,20 +1,20 @@
-import { createApp } from 'vue'
-import './style.css'
-import App from './App.vue'
+import { createApp } from 'vue';
+import './style.css';
 import {
-    createWebHistory,
-    createRouter,
-    setupDataFetchingGuard
-  } from 'vue-router/auto'
+  createRouter,
+  createWebHistory,
+  setupDataFetchingGuard,
+} from 'vue-router/auto';
+import App from './App.vue';
 
 const router = createRouter({
-    history: createWebHistory()
-})
+  history: createWebHistory(),
+});
 
-setupDataFetchingGuard(router)
+setupDataFetchingGuard(router);
 
-const app = createApp(App)
+const app = createApp(App);
 
-app.use(router)
+app.use(router);
 
-app.mount('#app')
+app.mount('#app');

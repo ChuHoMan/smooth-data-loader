@@ -1,5 +1,5 @@
-import MisxLink from "./Link.vue"
+import MisxLink from './Link.vue';
 
 export {
-    MisxLink
-}
+  MisxLink,
+};

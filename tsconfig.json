@@ -1,22 +1,21 @@
 {
-    "$schema": "https://json.schemastore.org/tsconfig",
-    "compilerOptions": {
-      "target": "ESNext",
-      "jsx": "preserve",
-      "experimentalDecorators": true,
-      "customConditions": ["dev"],
-      "baseUrl": ".",
-      "module": "ESNext",
-      "moduleResolution": "Bundler",
-      "resolveJsonModule": true,
-      "allowJs": false,
-      "strict": true,
-      "strictNullChecks": true,
-      "noEmit": true,
-      "allowSyntheticDefaultImports": true,
-      "esModuleInterop": true,
-      "skipLibCheck": true
-    },
-    "exclude": ["**/dist/**", "**/node_modules/**"]
-  }
-  
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "target": "ESNext",
+    "jsx": "preserve",
+    "experimentalDecorators": true,
+    "baseUrl": ".",
+    "customConditions": ["dev"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "resolveJsonModule": true,
+    "allowJs": false,
+    "strict": true,
+    "strictNullChecks": true,
+    "noEmit": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  },
+  "exclude": ["**/dist/**", "**/node_modules/**"]
+}
