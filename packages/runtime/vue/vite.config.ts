@@ -5,7 +5,6 @@ import dts from 'vite-plugin-dts';
 import { dependencies, peerDependencies } from './package.json';
 
 const external = Object.keys({ ...dependencies, ...peerDependencies });
-
 export default defineConfig(({ mode }) => {
   const isDev = mode === 'development';
 

@@ -14,7 +14,8 @@
   },
   "scripts": {
     "dev": "vite build --watch --mode development",
-    "build": "vite build"
+    "build": "vite build",
+    "version": "pnpm run build"
   },
   "peerDependencies": {
     "unplugin-vue-router": "^0.7.0",

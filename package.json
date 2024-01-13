@@ -9,13 +9,16 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint .  --cache",
-    "lint:fix": "eslint . \"**/*.{ts,tsx,js,vue,json}\" --cache --fix"
+    "build": "pnpm --filter \"@smooth-data-loader/*\" build",
+    "lint:fix": "eslint . \"**/*.{ts,tsx,js,vue,json}\" --cache --fix",
+    "release": "bumpp packages/**/package.json --no-commit --no-push --no-tag"
   },
   "devDependencies": {
     "@chuhoman/eslint-config": "^1.0.3",
     "@types/react": "^18.2.18",
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-vue": "^4.5.2",
+    "bumpp": "^9.2.1",
     "eslint": "^8.56.0",
     "typescript": "^5.3.3",
     "unplugin-vue-router": "^0.7.0",

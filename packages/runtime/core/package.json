@@ -29,7 +29,8 @@
   ],
   "scripts": {
     "dev": "vite build --watch --mode development",
-    "build": "vite build"
+    "build": "vite build",
+    "version": "pnpm run build"
   },
   "peerDependencies": {
   },
