@@ -1,0 +1,26 @@
+{
+  "$schema": "node_modules/lerna/schemas/lerna-schema.json",
+  "npmClient": "pnpm",
+  "useWorkspaces": true,
+  "ignoreChanges": [
+    "**/__fixtures__/**",
+    "**/__tests__/**",
+    "**/*.md",
+    "**/web-app/**",
+    "**/static/**"
+  ],
+  "command": {
+    "version": {
+      "ignoreChanges": [
+        "**/__fixtures__/**",
+        "**/__tests__/**",
+        "**/*.md",
+        "**/static/**"
+      ]
+    },
+    "publish": {
+      "allowBranch": ["main", "prerelease/*"],
+      "ignoreChanges": ["ignored-file", ".DS_Store", "**/__tests__/**"]
+    }
+  }
+}

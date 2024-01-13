@@ -11,7 +11,7 @@
     "lint": "eslint .  --cache",
     "build": "pnpm --filter \"@smooth-data-loader/*\" build",
     "lint:fix": "eslint . \"**/*.{ts,tsx,js,vue,json}\" --cache --fix",
-    "release": "bumpp packages/**/package.json --no-commit --no-push --no-tag"
+    "release": "lerna version --no-push --no-private --no-git-tag-version"
   },
   "devDependencies": {
     "@chuhoman/eslint-config": "^1.0.3",
@@ -20,6 +20,7 @@
     "@vitejs/plugin-vue": "^4.5.2",
     "bumpp": "^9.2.1",
     "eslint": "^8.56.0",
+    "lerna": "^7.4.2",
     "typescript": "^5.3.3",
     "unplugin-vue-router": "^0.7.0",
     "vite": "^5.0.9",
