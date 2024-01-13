@@ -9,6 +9,7 @@
     "**/web-app/**",
     "**/static/**"
   ],
+  "version": "0.0.0",
   "command": {
     "version": {
       "ignoreChanges": [
