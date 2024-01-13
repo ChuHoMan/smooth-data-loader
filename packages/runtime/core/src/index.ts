@@ -15,8 +15,6 @@ export function intersectionObserver(target: Element, callback: IntersectionObse
   const observer = new IntersectionObserver(callback, opts);
 
   requestIdleCallback(() => {
-    console.log(observer, target);
-
     observer.observe(target);
   }, {
     timeout: 1000,
@@ -31,3 +29,7 @@ export function intersectionObserver(target: Element, callback: IntersectionObse
     stop,
   };
 }
+
+export type {
+  PrefetchBehavior,
+} from './types';

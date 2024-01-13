@@ -1,5 +1,6 @@
 {
   "name": "@smooth-data-loader/runtime-vue",
+  "type": "module",
   "version": "1.0.0",
   "description": "",
   "author": "ChuHoMan",
@@ -12,15 +13,18 @@
     }
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite build --watch --mode development",
+    "build": "vite build"
   },
   "peerDependencies": {
+    "unplugin-vue-router": "^0.7.0",
     "vue": ">= 3",
-    "vue-router": ">= 4"
+    "vue-router": "^4.1.0"
   },
   "dependencies": {
     "@smooth-data-loader/runtime-core": "workspace:*"
   },
   "devDependencies": {
+    "vite": "^5.0.9"
   }
 }

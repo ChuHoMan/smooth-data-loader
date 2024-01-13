@@ -8,7 +8,7 @@ export const useUserData = defineLoader(async (route) => {
   // return anything you want to expose
   return user;
 }, {
-  key: 'user',
+  lazy: true,
   cacheTime: 10 * 1000,
 });
 

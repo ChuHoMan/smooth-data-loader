@@ -1,19 +1,30 @@
-<script lang="ts">
-import { useRoute, useRouter } from 'vue-router';
+<script lang="ts" setup>
+import { RouteLocationNormalized, RouteLocationRaw, Router, useRouter } from 'vue-router';
 import { HasDataLoaderMeta } from 'vue-router/auto';
 import { isDataLoader } from './loader';
+import { PRELOAD_PROMISES_KEY } from './symbols';
 
-async function preloadRouteComponents(matched: any, router = useRouter()) {
+interface PrefetchPageLinksProps {
+  to: RouteLocationRaw
+}
+
+const props = defineProps<PrefetchPageLinksProps>();
+
+defineOptions({
+  name: 'PrefetchPageLinks',
+});
+
+async function preloadRouteComponents(matched: any, router: Router = useRouter()) {
   if (!matched.length) {
     return;
   }
 
   // data-loader
-  const components = matched.map(comp => comp?.meta[HasDataLoaderMeta]).filter(Boolean).flat(1);
+  const components = matched.map((route: RouteLocationNormalized) => route?.meta[HasDataLoaderMeta]).filter(Boolean).flat(1);
 
-  const promises = router.__preloadPromises = router.__preloadPromises || [];
+  const promises = router[PRELOAD_PROMISES_KEY] = router[PRELOAD_PROMISES_KEY] || [];
   for (const comp of components) {
-    const promise = Promise.resolve((comp as () => any)()).catch(() => {}).finally(() => promises.splice(promises.indexOf(promise)));
+    const promise = Promise.resolve((comp as () => any)()).catch(() => {}).finally(() => promises.splice(promises.indexOf(promise))) as Promise<Record<string, unknown>>;
 
     promises.push(promise);
   }
@@ -21,7 +32,7 @@ async function preloadRouteComponents(matched: any, router = useRouter()) {
   return Promise.all(promises);
 }
 
-function preloadRouteLoaderData(modules: Record<string | symbol, unknown>[], router, route: any) {
+function preloadRouteLoaderData(modules: Record<string | symbol, unknown>[], router: Router, route: RouteLocationNormalized) {
   if (!modules) {
     return;
   }
@@ -37,28 +48,15 @@ function preloadRouteLoaderData(modules: Record<string | symbol, unknown>[], rou
   });
 }
 
-function usePrefetchPageLinks(props) {
+function usePrefetchPageLinks(props: PrefetchPageLinksProps) {
   const router = useRouter();
 
-  const resolved = router.resolve(props.to);
+  const resolved = router.resolve(props.to as string) as RouteLocationNormalized;
 
   preloadRouteComponents(resolved.matched, router).then((modules) => {
     preloadRouteLoaderData(modules!, router, resolved);
   });
 }
 
-export default {
-  name: 'PrefetchPageLinks',
-  props: {
-    to: {
-      type: String,
-      default: '',
-    },
-  },
-  setup(props) {
-    usePrefetchPageLinks(props);
-
-    return () => {};
-  },
-};
+usePrefetchPageLinks(props);
 </script>

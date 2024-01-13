@@ -1,5 +1,6 @@
 {
   "name": "@smooth-data-loader/runtime-react",
+  "type": "module",
   "version": "1.0.0",
   "description": "",
   "author": "ChuHoMan",
@@ -8,20 +9,39 @@
   "exports": {
     ".": {
       "dev": "./src/index.ts",
-      "default": "./dist/esm/router/index.js"
-    }
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs.js",
+      "import": "./dist/index.es.js",
+      "default": "./dist/index.umd.js"
+    },
+    "./*": [
+      "./*",
+      "./*.d.ts"
+    ]
   },
+  "main": "dist/index.umd.js",
+  "module": "dist/index.es.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "scripts",
+    "types"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite build --watch --mode development",
+    "build": "vite build"
   },
   "peerDependencies": {
+    "react": ">= 17",
+    "react-dom": ">= 17",
+    "react-router": "^6.21.1",
+    "react-router-dom": "^6.21.1",
+    "swr": "^2.0.0"
   },
   "dependencies": {
     "@smooth-data-loader/runtime-core": "workspace:*"
   },
   "devDependencies": {
-    "react-router": "^6.21.1",
-    "react-router-dom": "^6.21.1",
-    "swr": "^2.2.4"
+    "@vitejs/plugin-react-swc": "^3.5.0"
   }
 }

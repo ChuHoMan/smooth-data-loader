@@ -1,20 +1,39 @@
-<script lang="ts">
-import { PropType, Ref, defineComponent, onMounted, onUnmounted, ref, toRef, watch } from 'vue';
-import { RouterLink } from 'vue-router';
-import { intersectionObserver } from '@smooth-data-loader/runtime-core';
+<script lang="ts" setup>
+import { ComponentPublicInstance, Ref, onMounted, onUnmounted, ref, toRef, watch } from 'vue';
+import { RouterLink, RouterLinkProps } from 'vue-router';
+import { PrefetchBehavior, intersectionObserver } from '@smooth-data-loader/runtime-core';
 import PrefetchPageLinks from './PrefetchPageLinks.vue';
 
-type PrefetchBehavior = 'intent' | 'render' | 'none' | 'viewport';
-
-interface LinkProps {
-  prefetch: PrefetchBehavior
+interface LinkProps extends RouterLinkProps {
+  prefetch?: PrefetchBehavior
 }
 
-function usePrefetch(prefetch: Ref<LinkProps['prefetch']>, props: Record<string, any>, emit) {
+const props = withDefaults(defineProps<LinkProps>(), {
+  prefetch: 'none',
+});
+
+const emits = defineEmits<{
+  focus: [e: Event]
+  blur: [e: Event]
+  mouseenter: [e: Event]
+  mouseleave: [e: Event]
+  touchstart: [e: Event]
+}>();
+
+defineOptions({
+  name: 'SmoothLink',
+  components: {
+    RouterLink,
+    PrefetchPageLinks,
+  },
+  inheritAttrs: false,
+});
+
+function usePrefetch(prefetch: Ref<LinkProps['prefetch']>, _: LinkProps, emit: typeof emits) {
   const maybePrefetch = ref(false);
   const shouldPrefetch = ref(false);
   const prefetched = ref(false);
-  const linkRef = ref(null);
+  const linkRef = ref<ComponentPublicInstance<typeof RouterLink> | null>(null);
 
   if (prefetch.value === 'render') {
     shouldPrefetch.value = true;
@@ -29,7 +48,7 @@ function usePrefetch(prefetch: Ref<LinkProps['prefetch']>, props: Record<string,
       };
 
       if (linkRef.value) {
-        const { stop } = intersectionObserver(linkRef.value, callback);
+        const { stop } = intersectionObserver(linkRef.value.$el, callback);
         stopObserver = stop;
       }
     });
@@ -74,7 +93,7 @@ function usePrefetch(prefetch: Ref<LinkProps['prefetch']>, props: Record<string,
 
   function composeEventHandlers(theirHandler: string, ourHandler: (e: Event) => any) {
     return (e: Event) => {
-      emit(theirHandler);
+      emit(theirHandler as any, e);
       ourHandler(e);
     };
   }
@@ -92,58 +111,28 @@ function usePrefetch(prefetch: Ref<LinkProps['prefetch']>, props: Record<string,
   };
 }
 
-export default defineComponent({
-  name: 'MisxLink',
-  components: {
-    RouterLink,
-    PrefetchPageLinks,
-  },
-  inheritAttrs: false,
-  props: {
-    ...(RouterLink as any).props,
-    prefetch: {
-      type: String as PropType<PrefetchBehavior>,
-      default: 'none',
-    },
-  },
-  setup(props, {
-    emit,
-  }) {
-    const prefetch = toRef(() => props.prefetch);
+const prefetch = toRef(() => props.prefetch);
 
-    const { linkRef, shouldPrefetch, prefetchHandles } = usePrefetch(prefetch, props, emit);
-
-    return {
-      prefetchHandles,
-      linkRef,
-      shouldPrefetch,
-    };
-  },
-});
+const { linkRef, shouldPrefetch, prefetchHandles } = usePrefetch(prefetch, props, emits);
 </script>
 
 <template>
   <router-link
-    v-slot="{ href, navigate }"
     v-bind="$props"
+    ref="linkRef"
     @focus="prefetchHandles.onFocus"
     @blur="prefetchHandles.onBlur"
     @mouseenter="prefetchHandles.onMouseEnter"
     @mouseleave="prefetchHandles.onMouseLeave"
     @touchstart="prefetchHandles.onTouchStart"
   >
-    <a
-      v-bind="$attrs"
-      ref="linkRef"
-      :href="href"
-      @click="navigate"
-    >
-      <slot />
-    </a>
+    <template #default="slotProps">
+      <slot v-bind="slotProps" />
+    </template>
   </router-link>
 
   <prefetch-page-links
     v-if="shouldPrefetch"
-    v-bind="$props"
+    :to="to"
   />
 </template>
