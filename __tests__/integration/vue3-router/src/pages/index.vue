@@ -9,5 +9,5 @@ export default {
 </script>
 
 <template>
-  <div>i am root</div>
+  <div>root</div>
 </template>

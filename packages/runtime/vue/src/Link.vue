@@ -124,7 +124,7 @@ const { linkRef, shouldPrefetch, prefetchHandles } = usePrefetch(prefetch, props
     @blur="prefetchHandles.onBlur"
     @mouseenter="prefetchHandles.onMouseEnter"
     @mouseleave="prefetchHandles.onMouseLeave"
-    @touchstart="prefetchHandles.onTouchStart"
+    @touchstart.passive="prefetchHandles.onTouchStart"
   >
     <template #default="slotProps">
       <slot v-bind="slotProps" />

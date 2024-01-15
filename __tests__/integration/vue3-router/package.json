@@ -1,5 +1,5 @@
 {
-  "name": "vue3-router",
+  "name": "@integration-test/vue3-router",
   "type": "module",
   "version": "0.0.0",
   "private": true,

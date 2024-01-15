@@ -1,0 +1,54 @@
+import { expect, test } from '@playwright/test';
+
+test('link preload', async ({ page }) => {
+  // render
+  const renderPromise = page.waitForResponse('**/api/render', {
+    timeout: 10000,
+  });
+
+  await page.goto('./', {
+    waitUntil: 'networkidle',
+  });
+
+  const renderApiRes = await renderPromise;
+  expect(renderApiRes.ok).toBeTruthy();
+  expect(await renderApiRes.json()).toMatchObject({
+    state: 'render',
+  });
+
+  // hover
+  await page.getByRole('link', { name: 'intent' }).hover();
+  const statePromise = page.waitForResponse('**/api/intent', {
+    timeout: 10000,
+  });
+
+  const stateApiRes = await statePromise;
+  expect(stateApiRes.ok).toBeTruthy();
+  expect(await stateApiRes.json()).toMatchObject({
+    state: 'intent',
+  });
+
+  // viewport
+  const pageHeight = await page.evaluate(() => document.body.scrollHeight);
+  const viewportPromise = page.waitForResponse('**/api/viewport', {
+    timeout: 10000,
+  });
+  await page.mouse.wheel(0, pageHeight);
+  const viewportApiRes = await viewportPromise;
+  expect(viewportApiRes.ok).toBeTruthy();
+  expect(await viewportApiRes.json()).toMatchObject({
+    state: 'viewport',
+  });
+});
+
+test('page display on preload', async ({ page }) => {
+  await page.goto('./none');
+
+  expect(page.getByText('part of page')).toBeVisible();
+  expect(page.getByText('Loading...')).toBeVisible();
+
+  await page.waitForLoadState('networkidle');
+
+  expect(page.getByText('/none page, data is none')).toBeVisible();
+  expect(page.getByText('Loading...')).toBeHidden();
+});

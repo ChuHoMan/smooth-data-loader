@@ -31,4 +31,14 @@ export default defineMock([
     },
     delay: 1000,
   },
+  {
+    url: '/api/viewport',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: {
+      state: 'viewport',
+    },
+    delay: 1000,
+  },
 ]);

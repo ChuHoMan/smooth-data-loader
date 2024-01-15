@@ -3,21 +3,30 @@ import { MisxLink } from '@smooth-data-loader/runtime-vue';
 </script>
 
 <template>
+  <RouterView />
   <nav>
     <ul>
       <li style="height: 100vh;">
         <misx-link to="/">
           root
         </misx-link>
+        <misx-link to="/render" prefetch="render">
+          render
+        </misx-link>
+        <misx-link to="/none" prefetch="none">
+          none
+        </misx-link>
+        <misx-link to="/intent" prefetch="intent">
+          intent
+        </misx-link>
       </li>
       <li>
-        <misx-link to="/user" prefetch="viewport">
-          user
+        <misx-link to="/viewport" prefetch="viewport">
+          viewport
         </misx-link>
       </li>
     </ul>
   </nav>
-  <RouterView />
 </template>
 
 <style scoped>

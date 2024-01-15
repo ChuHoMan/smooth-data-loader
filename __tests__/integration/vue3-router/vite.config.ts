@@ -7,9 +7,9 @@ import mockDevServerPlugin from 'vite-plugin-mock-dev-server';
 // https://vitejs.dev/config/
 export default defineConfig({
   server: {
-    port: 5173,
+    port: 7788,
     proxy: {
-      '^/api': { target: 'http://127.0.0.1:5173' },
+      '^/api': { target: 'http://127.0.0.1:7788' },
     },
     fs: {
       strict: false,

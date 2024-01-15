@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { RouteLocationNormalized, RouteLocationRaw, Router, useRouter } from 'vue-router';
+import { type RouteLocationNormalized, type RouteLocationRaw, type Router, useRouter } from 'vue-router';
 import { HasDataLoaderMeta } from 'vue-router/auto';
 import { isDataLoader } from './loader';
 import { PRELOAD_PROMISES_KEY } from './symbols';
@@ -60,3 +60,7 @@ function usePrefetchPageLinks(props: PrefetchPageLinksProps) {
 
 usePrefetchPageLinks(props);
 </script>
+
+<template>
+  <slot />
+</template>
