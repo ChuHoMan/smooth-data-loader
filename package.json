@@ -7,6 +7,7 @@
   "license": "ISC",
   "keywords": [],
   "scripts": {
+    "prepare": "husky install",
     "lint": "eslint .  --cache",
     "build": "pnpm --filter \"@smooth-data-loader/*\" build",
     "lint:fix": "eslint . \"**/*.{ts,tsx,js,vue,json}\" --cache --fix",
@@ -24,7 +25,9 @@
     "@vitejs/plugin-vue": "^4.5.2",
     "bumpp": "^9.2.1",
     "eslint": "^8.56.0",
+    "husky": "^8.0.3",
     "lerna": "^7.4.2",
+    "lint-staged": "^15.2.0",
     "playwright": "^1.40.1",
     "typescript": "^5.3.3",
     "unplugin-vue-router": "^0.7.0",
@@ -32,5 +35,8 @@
     "vite-plugin-dts": "^3.7.0",
     "vitest": "^1.1.1",
     "vue-tsc": "^1.8.25"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
   }
 }
