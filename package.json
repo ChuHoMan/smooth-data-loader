@@ -37,6 +37,6 @@
     "vue-tsc": "^1.8.25"
   },
   "lint-staged": {
-    "*": "eslint --fix"
+    "*": "eslint --cache --fix"
   }
 }
