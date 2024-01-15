@@ -1,32 +1,27 @@
+import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import VueRouter from 'unplugin-vue-router/vite';
-
-function testServerPlugin() {
-  return {
-    name: 'test-server-plugin',
-    apply: 'serve',
-    configureServer(server: unknown) {
-      const state = 0;
-      server.middlewares.use('/api/state', async (req, res, next) => {
-        if (req.method === 'GET') {
-          setTimeout(() => {
-            res.end(JSON.stringify({
-              state,
-            }));
-          }, 1500);
-        } else {
-          next();
-        }
-      });
-    },
-  };
-}
+import mockDevServerPlugin from 'vite-plugin-mock-dev-server';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  server: {
+    port: 5173,
+    proxy: {
+      '^/api': { target: 'http://127.0.0.1:5173' },
+    },
+    fs: {
+      strict: false,
+    },
+  },
   plugins: [
-    testServerPlugin(),
+    mockDevServerPlugin({
+      prefix: '^/api/',
+      include: [
+        '../../utils/mock/**/*.mock.{js,ts,cjs,mjs,json,json5}',
+      ],
+    }),
     VueRouter({
       dataFetching: true,
     }),
@@ -34,5 +29,8 @@ export default defineConfig({
   ],
   resolve: {
     conditions: ['dev'],
+    alias: [
+      { find: '@', replacement: resolve(__dirname, 'src') },
+    ],
   },
 });

@@ -3,7 +3,7 @@ import { defineLoader } from 'vue-router/auto';
 
 // name the loader however you want **and export it**
 export const useUserData = defineLoader(async (route) => {
-  const user = await fetch('/api/state').then(res => res.json());
+  const user = await fetch('/api/intent').then(res => res.json());
   // ...
   // return anything you want to expose
   return user;

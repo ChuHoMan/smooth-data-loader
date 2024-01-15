@@ -9,8 +9,6 @@ import { MisxLink } from '@smooth-data-loader/runtime-react';
 
 const root = createRoot(document.getElementById('root')!);
 
-// const LazyUser = lazy(() => import('./user/page'))
-
 const staticRoutes: RouteObject[] = [
   {
     path: '/',
@@ -21,22 +19,31 @@ const staticRoutes: RouteObject[] = [
         flexDirection: 'column',
       }}
       >
+        <Outlet />
         <div style={{
           height: '180vh',
         }}
         >
           <MisxLink to="/"> root </MisxLink>
+          <MisxLink to="/render" prefetch="render"> render </MisxLink>
+          <MisxLink to="/none" prefetch="none"> none </MisxLink>
         </div>
-        <MisxLink to="/user" prefetch="viewport">user </MisxLink>
-        <Outlet />
+        <MisxLink to="/intent" prefetch="viewport"> intent </MisxLink>
       </div>
     ),
     children: [
       {
-        path: 'user',
-        lazy: () => import('./user/page'),
-        id: 'user',
-        // loader
+        path: 'intent',
+        lazy: () => import('./intent/index'),
+        id: 'intent',
+      },
+      {
+        path: 'render',
+        lazy: () => import('./render/index'),
+      },
+      {
+        path: 'none',
+        lazy: () => import('./none/index'),
       },
     ],
   },

@@ -1,0 +1,13 @@
+{
+  "name": "tests",
+  "private": true,
+  "description": "",
+  "author": "ChuHoMan",
+  "license": "ISC",
+  "keywords": [],
+  "scripts": {},
+  "devDependencies": {
+    "vite": "^5.0.9",
+    "vite-plugin-mock-dev-server": "^1.4.5"
+  }
+}

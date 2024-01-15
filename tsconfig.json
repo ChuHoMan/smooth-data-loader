@@ -17,6 +17,9 @@
     "esModuleInterop": true,
     "skipLibCheck": true
   },
-  "references": [{ "path": "./tsconfig.node.json" }],
+  "references": [
+    { "path": "./tsconfig.node.json" },
+    { "path": "./tsconfig.test.json" }
+  ],
   "exclude": ["**/dist/**", "**/node_modules/**"]
 }

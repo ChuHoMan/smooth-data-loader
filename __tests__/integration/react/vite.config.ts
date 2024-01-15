@@ -1,37 +1,32 @@
+import { resolve } from 'node:path';
 import reactSWC from '@vitejs/plugin-react-swc';
-import { Plugin, defineConfig } from 'vite';
+import mockDevServerPlugin from 'vite-plugin-mock-dev-server';
 
-function testServerPlugin(): Plugin {
-  return {
-    name: 'test-server-plugin',
-    apply: 'serve',
-    configureServer(server: unknown) {
-      const state = 0;
-      server.middlewares.use('/api/state', async (req, res, next) => {
-        if (req.method === 'GET') {
-          setTimeout(() => {
-            res.end(JSON.stringify({
-              state,
-            }));
-          }, 3000);
-        } else {
-          next();
-        }
-      });
-    },
-  };
-}
+import { Plugin, defineConfig } from 'vite';
 
 export default defineConfig({
   server: {
-    port: 5173,
-    host: true,
+    port: 8777,
+    proxy: {
+      '^/api': { target: 'http://127.0.0.1:8777' },
+    },
+    fs: {
+      strict: false,
+    },
   },
   plugins: [
-    testServerPlugin(),
+    mockDevServerPlugin({
+      prefix: '^/api/',
+      include: [
+        '../../utils/mock/**/*.mock.{js,ts,cjs,mjs,json,json5}',
+      ],
+    }),
     reactSWC(),
   ],
   resolve: {
     conditions: ['dev'],
+    alias: [
+      { find: '@', replacement: resolve(__dirname, 'src') },
+    ],
   },
 });
