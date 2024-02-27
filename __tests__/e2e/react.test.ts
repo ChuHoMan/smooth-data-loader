@@ -25,6 +25,18 @@ test('link preload', async ({ page }) => {
   expect(await stateApiRes.json()).toMatchObject({
     state: 'intent',
   });
+
+  // viewport
+  const pageHeight = await page.evaluate(() => document.body.scrollHeight);
+  const viewportPromise = page.waitForResponse('**/api/viewport', {
+    timeout: 10000,
+  });
+  await page.mouse.wheel(0, pageHeight);
+  const viewportApiRes = await viewportPromise;
+  expect(viewportApiRes.ok).toBeTruthy();
+  expect(await viewportApiRes.json()).toMatchObject({
+    state: 'viewport',
+  });
 });
 
 test('loader with suspense', async ({ page }) => {

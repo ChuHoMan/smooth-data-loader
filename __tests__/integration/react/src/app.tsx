@@ -24,12 +24,18 @@ const staticRoutes: RouteObject[] = [
           height: '180vh',
         }}
         >
-          <SmoothLink to="/"> root </SmoothLink>
-          <SmoothLink to="/render" prefetch="render"> render </SmoothLink>
-          <SmoothLink to="/none" prefetch="none"> none </SmoothLink>
-          <SmoothLink to="/nested/1" prefetch="render"> nested-1 </SmoothLink>
+          <div style={{
+            height: '100vh',
+          }}
+          >
+            <SmoothLink to="/"> root </SmoothLink>
+            <SmoothLink to="/render" prefetch="render"> render </SmoothLink>
+            <SmoothLink to="/none" prefetch="none"> none </SmoothLink>
+            <SmoothLink to="/nested/1" prefetch="render"> nested-1 </SmoothLink>
+            <SmoothLink to="/intent" prefetch="intent"> intent </SmoothLink>
+          </div>
+          <SmoothLink to="/viewport" prefetch="viewport"> viewport </SmoothLink>
         </div>
-        <SmoothLink to="/intent" prefetch="viewport"> intent </SmoothLink>
       </div>
     ),
     children: [
@@ -45,6 +51,10 @@ const staticRoutes: RouteObject[] = [
       {
         path: 'none',
         lazy: () => import('./none/index'),
+      },
+      {
+        path: 'viewport',
+        lazy: () => import('./viewport/index'),
       },
       {
         path: 'nested',
