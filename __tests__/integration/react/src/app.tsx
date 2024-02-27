@@ -5,7 +5,7 @@ import {
   RouterProvider,
   createBrowserRouter,
 } from 'react-router-dom';
-import { MisxLink } from '@smooth-data-loader/runtime-react';
+import { SmoothLink } from '@smooth-data-loader/runtime-react';
 
 const root = createRoot(document.getElementById('root')!);
 
@@ -24,11 +24,12 @@ const staticRoutes: RouteObject[] = [
           height: '180vh',
         }}
         >
-          <MisxLink to="/"> root </MisxLink>
-          <MisxLink to="/render" prefetch="render"> render </MisxLink>
-          <MisxLink to="/none" prefetch="none"> none </MisxLink>
+          <SmoothLink to="/"> root </SmoothLink>
+          <SmoothLink to="/render" prefetch="render"> render </SmoothLink>
+          <SmoothLink to="/none" prefetch="none"> none </SmoothLink>
+          <SmoothLink to="/nested/1" prefetch="render"> nested-1 </SmoothLink>
         </div>
-        <MisxLink to="/intent" prefetch="viewport"> intent </MisxLink>
+        <SmoothLink to="/intent" prefetch="viewport"> intent </SmoothLink>
       </div>
     ),
     children: [
@@ -44,6 +45,16 @@ const staticRoutes: RouteObject[] = [
       {
         path: 'none',
         lazy: () => import('./none/index'),
+      },
+      {
+        path: 'nested',
+        element: <Outlet />,
+        children: [
+          {
+            path: ':id',
+            lazy: () => import('./nested/index'),
+          },
+        ],
       },
     ],
   },

@@ -32,16 +32,12 @@ function mergeRefs<T = any>(...refs: Array<React.MutableRefObject<T> | React.Leg
   };
 }
 
-const MisxLink = forwardRef<HTMLAnchorElement, MisxLinkProps>((props, forwardedRef) => {
+const SmoothLink = forwardRef<HTMLAnchorElement, MisxLinkProps>((props, forwardedRef) => {
   const { to, prefetch = 'none', prefetchOptions, ...restProps } = props;
   const isAbsolute = typeof to === 'string' && ABSOLUTE_URL_REGEX.test(to);
 
   const href = useHref(to);
   const [shouldPrefetch, ref, prefetchHandler] = usePrefetch(prefetch, restProps);
-
-  console.log({
-    shouldPrefetch,
-  });
 
   return (
     <>
@@ -60,6 +56,6 @@ const MisxLink = forwardRef<HTMLAnchorElement, MisxLinkProps>((props, forwardedR
   );
 });
 
-MisxLink.displayName = 'MisxLink';
+SmoothLink.displayName = 'SmoothLink';
 
-export default memo(MisxLink);
+export default memo(SmoothLink);

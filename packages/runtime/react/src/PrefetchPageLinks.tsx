@@ -215,12 +215,13 @@ function PrefetchPageLinks({
 
   useEffect(() => {
     if (matchRoute?.route?.path) {
-      console.log(matchRoute);
-
       matchRoute.route?.lazy?.().then((mod) => {
-        // TODO: ts
-        const { swrData } = mod as any;
-        preload(swrData.key, swrData.fetcher);
+        const { swrData } = mod as Record<string, any>;
+        preload(typeof swrData.key === 'function'
+          ? swrData.key({
+            params: matchRoute.params,
+          })
+          : swrData.key, swrData.fetcher);
       });
     }
   }, [matchRoute]);

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { MisxLink } from '@smooth-data-loader/runtime-vue';
+import { SmoothLink } from '@smooth-data-loader/runtime-vue';
 </script>
 
 <template>

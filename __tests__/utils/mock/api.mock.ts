@@ -41,4 +41,14 @@ export default defineMock([
     },
     delay: 1000,
   },
+  {
+    url: '/api/nested',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: {
+      state: 'nested',
+    },
+    delay: 1000,
+  },
 ]);
