@@ -1,0 +1,13 @@
+{
+  "name": "docs",
+  "private": true,
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview"
+  },
+  "devDependencies": {
+    "vitepress": "1.0.0-rc.44",
+    "vue": "^3.3.11"
+  }
+}

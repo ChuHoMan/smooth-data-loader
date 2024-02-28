@@ -12,6 +12,14 @@ module.exports = chuhoman({
   ],
   react: true,
   vue: true,
+  overrides: {
+    markdown: {
+      // 解决 md 编写 diff 语法时报错
+      'react/jsx-no-comment-textnodes': 'off',
+      'import/first': 'off',
+      'import/no-duplicates': 'off',
+    },
+  },
 }, {
   rules: {
     'react/react-in-jsx-scope': 'off',

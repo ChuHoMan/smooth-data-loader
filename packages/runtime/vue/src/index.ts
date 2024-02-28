@@ -15,3 +15,7 @@ export {
 export {
   defineColadaLoader,
 } from 'unplugin-vue-router/data-loaders/pinia-colada';
+
+export {
+  DataLoaderPlugin,
+} from 'unplugin-vue-router/runtime';

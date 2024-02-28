@@ -51,3 +51,6 @@ stats.html
 **/static
 
 test-results
+
+docs/.vitepress/dist
+docs/.vitepress/cache
