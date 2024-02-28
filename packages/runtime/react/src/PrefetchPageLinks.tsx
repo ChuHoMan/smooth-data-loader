@@ -199,7 +199,7 @@ function PrefetchPageLinks({
   page,
   prefetchOptions = {},
   ...dataLinkProps
-}: PrefetchPageDescriptor & { prefetchOptions: Record<string, any> }) {
+}: PrefetchPageDescriptor & { prefetchOptions?: Record<string, any> }) {
   const { prefetchChunks } = prefetchOptions;
   const dataRouter = useContext(UNSAFE_DataRouterContext);
 
