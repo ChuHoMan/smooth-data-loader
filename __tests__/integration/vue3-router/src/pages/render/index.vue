@@ -11,7 +11,6 @@ export const useRenderData = defineLoader(async (route) => {
   return data;
 }, {
   lazy: true,
-  cacheTime: 10 * 1000,
 });
 
 export default {
@@ -20,12 +19,12 @@ export default {
 </script>
 
 <script lang="ts" setup>
-const { data, pending, error, refresh } = useRenderData();
+const { data, isLoading } = useRenderData();
 const route = useRoute();
 </script>
 
 <template>
-  <div v-if="pending">
+  <div v-if="isLoading">
     Loading...
   </div>
   <div v-else>

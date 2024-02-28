@@ -22,12 +22,12 @@ export default {
 </script>
 
 <script lang="ts" setup>
-const { data, pending } = useViewportData();
+const { data, isLoading } = useViewportData();
 const route = useRoute();
 </script>
 
 <template>
-  <div v-if="pending">
+  <div v-if="isLoading">
     Loading...
   </div>
   <div v-else>

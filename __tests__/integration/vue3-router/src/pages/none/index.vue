@@ -11,7 +11,6 @@ export const useNoneData = defineLoader(async (route) => {
   return data;
 }, {
   lazy: true,
-  cacheTime: 10 * 1000,
 });
 
 export default {
@@ -20,17 +19,17 @@ export default {
 </script>
 
 <script lang="ts" setup>
-const { data, pending, error, refresh } = useNoneData();
+const { data, isLoading } = useNoneData();
 const route = useRoute();
 console.log(route);
 </script>
 
 <template>
   <div>part of page</div>
-  <div v-if="pending">
+  <div v-if="isLoading">
     Loading...
   </div>
   <div v-else>
-    {{ `${route.path} page, data is ${data.state || ''}` }}
+    {{ `${route.path} page, data is ${data?.state || ''}` }}
   </div>
 </template>
