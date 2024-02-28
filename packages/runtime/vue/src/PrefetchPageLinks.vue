@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { type RouteLocationNormalized, type RouteLocationRaw, type Router, useRouter } from 'vue-router';
-import { HasDataLoaderMeta } from 'vue-router/auto';
+import { type RouteLocationNormalized, type RouteLocationRaw, useRouter } from 'vue-router';
+import { ABORT_CONTROLLER_KEY } from 'unplugin-vue-router/runtime';
 import { isDataLoader } from './loader';
 import { PRELOAD_PROMISES_KEY } from './symbols';
 
@@ -14,13 +14,13 @@ defineOptions({
   name: 'PrefetchPageLinks',
 });
 
-async function preloadRouteComponents(matched: any, router: Router = useRouter()) {
+async function preloadRouteComponents(matched: any, router: ReturnType<typeof useRouter> = useRouter()) {
   if (!matched.length) {
     return;
   }
 
   // data-loader
-  const components = matched.map((route: RouteLocationNormalized) => route?.meta[HasDataLoaderMeta]).filter(Boolean).flat(1);
+  const components = matched.map((route: Record<string, any>) => route.components?.default).filter((component: any) => typeof component === 'function');
 
   const promises = router[PRELOAD_PROMISES_KEY] = router[PRELOAD_PROMISES_KEY] || [];
   for (const comp of components) {
@@ -32,12 +32,13 @@ async function preloadRouteComponents(matched: any, router: Router = useRouter()
   return Promise.all(promises);
 }
 
-function preloadRouteLoaderData(modules: Record<string | symbol, unknown>[], router: Router, route: RouteLocationNormalized) {
+function preloadRouteLoaderData(modules: Record<string | symbol, unknown>[], router: ReturnType<typeof useRouter>, route: RouteLocationNormalized) {
   if (!modules) {
     return;
   }
 
-  modules.forEach((mod) => {
+  route.meta[ABORT_CONTROLLER_KEY] = new AbortController();
+  modules.filter(Boolean).forEach((mod) => {
     const loaders = Object.keys(mod)
       .filter(exportName => isDataLoader(mod[exportName] as any))
       .map(loaderName => mod[loaderName] as Record<string, any>);

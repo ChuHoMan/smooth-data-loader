@@ -7,23 +7,23 @@ import { SmoothLink } from '@smooth-data-loader/runtime-vue';
   <nav>
     <ul>
       <li style="height: 100vh;">
-        <misx-link to="/">
+        <smooth-link to="/">
           root
-        </misx-link>
-        <misx-link to="/render" prefetch="render">
+        </smooth-link>
+        <smooth-link to="/render" prefetch="render">
           render
-        </misx-link>
-        <misx-link to="/none" prefetch="none">
+        </smooth-link>
+        <smooth-link to="/none" prefetch="none">
           none
-        </misx-link>
-        <misx-link to="/intent" prefetch="intent">
+        </smooth-link>
+        <smooth-link to="/intent" prefetch="intent">
           intent
-        </misx-link>
+        </smooth-link>
       </li>
       <li>
-        <misx-link to="/viewport" prefetch="viewport">
+        <smooth-link to="/viewport" prefetch="viewport">
           viewport
-        </misx-link>
+        </smooth-link>
       </li>
     </ul>
   </nav>

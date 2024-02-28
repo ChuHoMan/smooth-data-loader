@@ -1,16 +1,19 @@
 <script lang="ts">
-import { defineLoader, useRoute } from 'vue-router/auto';
+import { useRoute } from 'vue-router/auto';
+import { defineColadaLoader } from '@smooth-data-loader/runtime-vue';
 import { get } from '../../../../../utils/api';
 
 // name the loader however you want **and export it**
-export const useViewportData = defineLoader(async (route) => {
-  const data = await get('/api/viewport');
-  // ...
-  // return anything you want to expose
-  return data;
-}, {
+export const useViewportData = defineColadaLoader({
+  query: async () => {
+    const data = await get('/api/viewport');
+    // ...
+    // return anything you want to expose
+    return data;
+  },
+  key: () => ['viewport'],
   lazy: true,
-  cacheTime: 10 * 1000,
+  staleTime: 10 * 1000,
 });
 
 export default {
@@ -19,7 +22,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-const { data, pending, error, refresh } = useViewportData();
+const { data, pending } = useViewportData();
 const route = useRoute();
 </script>
 
@@ -28,6 +31,6 @@ const route = useRoute();
     Loading...
   </div>
   <div v-else>
-    {{ `${route.path} page, data is ${data.state || ''}` }}
+    {{ `${route.path} page, data is ${data?.state || ''}` }}
   </div>
 </template>

@@ -1,5 +1,5 @@
-// FIXME: hack to check data-loader symbol，because vue router is no export
+import { IS_USE_DATA_LOADER_KEY } from 'unplugin-vue-router/runtime';
+
 export function isDataLoader(loader: Record<string | symbol, unknown>) {
-  const symbols = Object.getOwnPropertySymbols(loader);
-  return symbols.length > 0;
+  return loader?.[IS_USE_DATA_LOADER_KEY];
 }

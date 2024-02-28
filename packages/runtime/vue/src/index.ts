@@ -7,3 +7,11 @@ export type {
 export {
   SmoothLink,
 };
+
+export {
+  defineBasicLoader as defineLoader,
+} from 'unplugin-vue-router/data-loaders/basic';
+
+export {
+  defineColadaLoader,
+} from 'unplugin-vue-router/data-loaders/pinia-colada';

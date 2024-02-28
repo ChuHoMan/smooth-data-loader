@@ -1,5 +1,6 @@
 <script lang="ts">
-import { defineLoader, useRoute } from 'vue-router/auto';
+import { useRoute } from 'vue-router/auto';
+import { defineLoader } from '@smooth-data-loader/runtime-vue';
 import { get } from '../../../../../utils/api';
 
 // name the loader however you want **and export it**

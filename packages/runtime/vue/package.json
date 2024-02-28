@@ -18,9 +18,19 @@
     "version": "pnpm run build"
   },
   "peerDependencies": {
-    "unplugin-vue-router": "^0.7.0",
+    "@pinia/colada": "~0.5.3",
+    "pinia": ">= 2.0.0",
+    "unplugin-vue-router": "^0.8.4",
     "vue": ">= 3",
     "vue-router": "^4.1.0"
+  },
+  "peerDependenciesMeta": {
+    "pinia": {
+      "optional": true
+    },
+    "@pinia/colada": {
+      "optional": true
+    }
   },
   "dependencies": {
     "@smooth-data-loader/runtime-core": "workspace:*"
