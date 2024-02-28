@@ -139,12 +139,8 @@ import { SmoothLink } from '@smooth-data-loader/runtime-react'; // [!code ++]
 const Component = () => {
   return (
     <>
-      <Link to="/nested/1"> render </Link>
-      {' '}
-      // [!code --]
-      <SmoothLink to="/nested/1" prefetch="render"> render </SmoothLink>
-      {' '}
-      // [!code ++]
+      <Link to="/nested/1"> render </Link> // [!code --]
+      <SmoothLink to="/nested/1" prefetch="render"> render </SmoothLink> // [!code ++]
     </>
   );
 };

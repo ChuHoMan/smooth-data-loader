@@ -18,6 +18,7 @@ module.exports = chuhoman({
       'react/jsx-no-comment-textnodes': 'off',
       'import/first': 'off',
       'import/no-duplicates': 'off',
+      'style/jsx-one-expression-per-line': 'off',
     },
   },
 }, {
