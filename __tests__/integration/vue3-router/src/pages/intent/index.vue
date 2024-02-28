@@ -11,7 +11,6 @@ export const useIntentData = defineLoader(async (route) => {
   return data;
 }, {
   lazy: true,
-  cacheTime: 10 * 1000,
 });
 
 export default {
@@ -20,15 +19,15 @@ export default {
 </script>
 
 <script lang="ts" setup>
-const { data, pending } = useIntentData();
+const { data, isLoading } = useIntentData();
 const route = useRoute();
 </script>
 
 <template>
-  <div v-if="pending">
+  <div v-if="isLoading">
     正在等待数据
   </div>
   <div v-else>
-    {{ `${route.path} page, data is ${data.state || ''}` }}
+    {{ `${route.path} page, data is ${data?.state || ''}` }}
   </div>
 </template>
