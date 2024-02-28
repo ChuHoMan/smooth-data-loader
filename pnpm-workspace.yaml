@@ -4,3 +4,4 @@ packages:
   - playground
   - __tests__
   - '__tests__/integration/**/*'
+  - docs

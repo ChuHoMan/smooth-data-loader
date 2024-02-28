@@ -14,7 +14,10 @@
     "test:e2e": "playwright test",
     "release": "lerna publish --no-private",
     "release-alpha": "lerna publish --no-private --dist-tag beta",
-    "release-dry-run": "lerna version --no-push --no-private --no-git-tag-version"
+    "release-dry-run": "lerna version --no-push --no-private --no-git-tag-version",
+    "docs:dev": "pnpm --filter docs dev",
+    "docs:build": "pnpm --filter docs build",
+    "docs:preview": "pnpm --filter docs preview"
   },
   "devDependencies": {
     "@chuhoman/eslint-config": "^1.0.3",
