@@ -127,7 +127,7 @@ importers:
   packages/runtime/react:
     dependencies:
       '@smooth-data-loader/runtime-core':
-        specifier: ^0.0.1-alpha.1
+        specifier: ^0.0.1-alpha.2
         version: link:../core
       react:
         specifier: '>= 17'
@@ -155,7 +155,7 @@ importers:
         specifier: ~0.5.3
         version: 0.5.3
       '@smooth-data-loader/runtime-core':
-        specifier: ^0.0.1-alpha.1
+        specifier: ^0.0.1-alpha.2
         version: link:../core
       pinia:
         specifier: '>= 2.0.0'
