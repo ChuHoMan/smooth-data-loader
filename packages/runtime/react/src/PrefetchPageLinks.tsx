@@ -1,6 +1,5 @@
 import { memo, useContext, useEffect, useMemo } from 'react';
-import { matchRoutes, useParams } from 'react-router-dom';
-import { UNSAFE_DataRouterContext } from 'react-router';
+import { UNSAFE_DataRouterContext, matchRoutes } from 'react-router-dom';
 import { preload } from 'swr';
 
 type Primitive = null | undefined | string | number | boolean | symbol | bigint;
@@ -215,14 +214,30 @@ function PrefetchPageLinks({
 
   useEffect(() => {
     if (matchRoute?.route?.path) {
-      matchRoute.route?.lazy?.().then((mod) => {
-        const { swrData } = mod as Record<string, any>;
+      if (matchRoute.route?.lazy) {
+        matchRoute.route.lazy?.().then((mod) => {
+          const { swrData } = mod as Record<string, any>;
+          preload(typeof swrData.key === 'function'
+            ? swrData.key({
+              params: matchRoute.params,
+            })
+            : swrData.key, swrData.fetcher);
+        });
+      } else if ((matchRoute.route as typeof matchRoute.route & {
+        swrData: any // TODO: ts
+      }).swrData) {
+        const swrData = (matchRoute.route as typeof matchRoute.route & {
+          swrData: any // TODO: ts
+        }).swrData;
         preload(typeof swrData.key === 'function'
           ? swrData.key({
             params: matchRoute.params,
           })
           : swrData.key, swrData.fetcher);
-      });
+      } else {
+        // TODO: more information
+        console.warn('[smooth-data-loader] can not found route module');
+      }
     }
   }, [matchRoute]);
 
