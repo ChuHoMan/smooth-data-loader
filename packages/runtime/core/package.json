@@ -31,5 +31,9 @@
     "dev": "vite build --watch --mode development",
     "build": "vite build",
     "version": "pnpm run build"
+  },
+  "gitHead": "6344ba1e5ea11f279e2bea0a9913a7b4a0572d4f",
+  "publishConfig": {
+    "access": "public"
   }
 }

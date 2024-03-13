@@ -40,9 +40,13 @@
     "swr": "^2.0.0"
   },
   "dependencies": {
-    "@smooth-data-loader/runtime-core": "workspace:*"
+    "@smooth-data-loader/runtime-core": "0.0.1-alpha.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react-swc": "^3.5.0"
+  },
+  "gitHead": "6344ba1e5ea11f279e2bea0a9913a7b4a0572d4f",
+  "publishConfig": {
+    "access": "public"
   }
 }
