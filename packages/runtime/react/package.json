@@ -45,8 +45,9 @@
   "devDependencies": {
     "@vitejs/plugin-react-swc": "^3.5.0"
   },
-  "gitHead": "6344ba1e5ea11f279e2bea0a9913a7b4a0572d4f",
+  "gitHead": "d8fd4999f62f5ff350fcc4b89cc985a4f39b3870",
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }
