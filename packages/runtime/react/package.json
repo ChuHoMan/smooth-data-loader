@@ -1,7 +1,7 @@
 {
   "name": "@smooth-data-loader/runtime-react",
   "type": "module",
-  "version": "0.0.1-alpha.2",
+  "version": "0.0.1",
   "description": "runtime react for smooth-data-loader",
   "author": "ChuHoMan",
   "license": "MIT",
@@ -40,7 +40,7 @@
     "swr": "^2.0.0"
   },
   "dependencies": {
-    "@smooth-data-loader/runtime-core": "^0.0.1-alpha.2"
+    "@smooth-data-loader/runtime-core": "^0.0.1"
   },
   "devDependencies": {
     "@vitejs/plugin-react-swc": "^3.5.0"
