@@ -3,12 +3,8 @@ import { defer } from 'react-router-dom';
 import AsyncPart from '@/components/async';
 
 const { loader, swrData } = defineLoader((params) => {
-  console.log('params', params);
-
   return '/api/intent';
 }, () => {
-  console.log('loader');
-
   return defer({
     data: fetch('/api/intent', {
       method: 'get',
