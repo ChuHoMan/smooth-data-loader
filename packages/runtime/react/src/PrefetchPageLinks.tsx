@@ -1,6 +1,6 @@
 import { memo, useContext, useEffect, useMemo } from 'react';
 import { UNSAFE_DataRouterContext, matchRoutes } from 'react-router-dom';
-import { preload } from 'swr';
+import { Key, preload } from 'swr';
 
 type Primitive = null | undefined | string | number | boolean | symbol | bigint;
 
@@ -192,6 +192,14 @@ export interface PrefetchPageDescriptor
    */
   page: string
 }
+
+function getKey(key: Key | ((...args: any[]) => any), params: any) {
+  return typeof key === 'function'
+    ? key({
+      params,
+    })
+    : key;
+}
 /**
  */
 function PrefetchPageLinks({
@@ -217,11 +225,10 @@ function PrefetchPageLinks({
       if (matchRoute.route?.lazy) {
         matchRoute.route.lazy?.().then((mod) => {
           const { swrData } = mod as Record<string, any>;
-          preload(typeof swrData.key === 'function'
-            ? swrData.key({
-              params: matchRoute.params,
-            })
-            : swrData.key, swrData.fetcher);
+          const { key, fetcher } = swrData || {};
+          if (key) {
+            preload(getKey(key, matchRoute.params), fetcher);
+          }
         });
       } else if ((matchRoute.route as typeof matchRoute.route & {
         swrData: any // TODO: ts
@@ -229,13 +236,11 @@ function PrefetchPageLinks({
         const swrData = (matchRoute.route as typeof matchRoute.route & {
           swrData: any // TODO: ts
         }).swrData;
-        preload(typeof swrData.key === 'function'
-          ? swrData.key({
-            params: matchRoute.params,
-          })
-          : swrData.key, swrData.fetcher);
+        const { key, fetcher } = swrData || {};
+        if (key) {
+          preload(getKey(key, matchRoute.params), fetcher);
+        }
       } else {
-        // TODO: more information
         console.warn(`[smooth-data-loader] can not found route module: ${matchRoute}`);
       }
     }

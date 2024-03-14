@@ -49,3 +49,13 @@ test('loader with suspense', async ({ page }) => {
   expect(page.getByText('/none page, data is none')).toBeVisible();
   expect(page.getByText('Loading...')).toBeHidden();
 });
+
+test('only preload component', async ({ page }) => {
+  await page.goto('./', {
+    waitUntil: 'networkidle',
+  });
+
+  await page.getByRole('link', { name: 'no-key' }).click();
+
+  expect(page.getByText('no-key')).toBeVisible();
+});

@@ -33,6 +33,7 @@ const staticRoutes: RouteObject[] = [
             <SmoothLink to="/none" prefetch="none"> none </SmoothLink>
             <SmoothLink to="/nested/1" prefetch="render"> nested-1 </SmoothLink>
             <SmoothLink to="/intent" prefetch="intent"> intent </SmoothLink>
+            <SmoothLink to="/no-key" prefetch="intent"> no-key </SmoothLink>
           </div>
           <SmoothLink to="/viewport" prefetch="viewport"> viewport </SmoothLink>
         </div>
@@ -65,6 +66,10 @@ const staticRoutes: RouteObject[] = [
             lazy: () => import('./nested/index'),
           },
         ],
+      },
+      {
+        path: 'no-key',
+        lazy: () => import('./no-key/index'),
       },
     ],
   },
