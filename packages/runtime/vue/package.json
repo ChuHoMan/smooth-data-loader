@@ -5,6 +5,7 @@
   "description": "runtime vue for smooth-data-loader",
   "author": "ChuHoMan",
   "license": "MIT",
+  "homepage": "https://chuhoman.github.io/smooth-data-loader/",
   "keywords": [],
   "exports": {
     ".": {
