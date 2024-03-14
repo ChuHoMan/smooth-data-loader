@@ -236,7 +236,7 @@ function PrefetchPageLinks({
           : swrData.key, swrData.fetcher);
       } else {
         // TODO: more information
-        console.warn('[smooth-data-loader] can not found route module');
+        console.warn(`[smooth-data-loader] can not found route module: ${matchRoute}`);
       }
     }
   }, [matchRoute]);
