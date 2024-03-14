@@ -7,3 +7,7 @@ Preload routes & data for SPA apps. Enhance user experience
 - react + react-router@6
 
 - vue3 + vue-router
+
+## License
+
+[MIT](./LICENSE)
