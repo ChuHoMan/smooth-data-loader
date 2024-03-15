@@ -1,7 +1,7 @@
 {
   "name": "@smooth-data-loader/runtime-vue",
   "type": "module",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "runtime vue for smooth-data-loader",
   "author": "ChuHoMan",
   "license": "MIT",
@@ -34,7 +34,7 @@
     }
   },
   "dependencies": {
-    "@smooth-data-loader/runtime-core": "^0.0.2"
+    "@smooth-data-loader/runtime-core": "^0.0.3"
   },
   "devDependencies": {
     "vite": "^5.0.9"
