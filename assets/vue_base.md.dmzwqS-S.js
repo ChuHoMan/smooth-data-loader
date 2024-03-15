@@ -1,1 +1,0 @@
-import{_ as e,c as t,o as a}from"./chunks/framework.ZG-U3XER.js";const m=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"vue/base.md","filePath":"vue/base.md","lastUpdated":1710486526000}'),s={name:"vue/base.md"};function r(o,c,n,d,p,_){return a(),t("div")}const f=e(s,[["render",r]]);export{m as __pageData,f as default};
