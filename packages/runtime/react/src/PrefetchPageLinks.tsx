@@ -1,6 +1,7 @@
 import { memo, useContext, useEffect, useMemo } from 'react';
 import { UNSAFE_DataRouterContext, matchRoutes } from 'react-router-dom';
 import { Key, preload } from 'swr';
+import { SmoothLinkProps } from './Link';
 
 type Primitive = null | undefined | string | number | boolean | symbol | bigint;
 
@@ -200,14 +201,21 @@ function getKey(key: Key | ((...args: any[]) => any), params: any) {
     })
     : key;
 }
+
+function handlePreloadSwrData(mod: Record<string, any>, params: Record<string, any>) {
+  const { swrData } = mod as Record<string, any>;
+  const { key, fetcher } = swrData || {};
+  if (key) {
+    preload(getKey(key, params), fetcher);
+  }
+}
 /**
  */
 function PrefetchPageLinks({
   page,
   prefetchOptions = {},
-  ...dataLinkProps
-}: PrefetchPageDescriptor & { prefetchOptions?: Record<string, any> }) {
-  const { prefetchChunks } = prefetchOptions;
+}: PrefetchPageDescriptor & Pick<SmoothLinkProps, 'prefetchOptions'>) {
+  const { onPrefetch } = prefetchOptions;
   const dataRouter = useContext(UNSAFE_DataRouterContext);
 
   const matches = useMemo(
@@ -222,26 +230,16 @@ function PrefetchPageLinks({
 
   useEffect(() => {
     if (matchRoute?.route?.path) {
+      onPrefetch?.(matchRoute);
+
       if (matchRoute.route?.lazy) {
-        matchRoute.route.lazy?.().then((mod) => {
-          const { swrData } = mod as Record<string, any>;
-          const { key, fetcher } = swrData || {};
-          if (key) {
-            preload(getKey(key, matchRoute.params), fetcher);
-          }
-        });
+        matchRoute.route.lazy?.().then(mod => handlePreloadSwrData(mod, matchRoute.params));
       } else if ((matchRoute.route as typeof matchRoute.route & {
         swrData: any // TODO: ts
       }).swrData) {
-        const swrData = (matchRoute.route as typeof matchRoute.route & {
-          swrData: any // TODO: ts
-        }).swrData;
-        const { key, fetcher } = swrData || {};
-        if (key) {
-          preload(getKey(key, matchRoute.params), fetcher);
-        }
+        handlePreloadSwrData(matchRoute.route, matchRoute.params);
       } else {
-        console.warn(`[smooth-data-loader] can not found route module: ${matchRoute}`);
+        console.warn(`[smooth-data-loader] can not found route module: ${JSON.stringify(matchRoute)}`);
       }
     }
   }, [matchRoute]);

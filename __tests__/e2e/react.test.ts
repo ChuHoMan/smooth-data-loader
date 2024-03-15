@@ -59,3 +59,19 @@ test('only preload component', async ({ page }) => {
 
   expect(page.getByText('no-key')).toBeVisible();
 });
+
+test('trigger onPrefetch event', async ({ page }) => {
+  const jsonPromise = page.waitForResponse((response) => {
+    return (response.url().includes('/custom-prefetch/index.json') && response.status() === 200);
+  }, {
+    timeout: 5000,
+  });
+  await page.goto('./', {
+    waitUntil: 'networkidle',
+  });
+
+  await page.getByRole('link', { name: 'custom-prefetch' }).click();
+
+  expect(page.getByText('custom-prefetch')).toBeVisible();
+  expect(await jsonPromise).toBeTruthy();
+});

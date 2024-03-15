@@ -9,6 +9,10 @@ import { SmoothLink } from '@smooth-data-loader/runtime-react';
 
 const root = createRoot(document.getElementById('root')!);
 
+async function onPrefetch() {
+  await import('./custom-prefetch/index.json');
+}
+
 const staticRoutes: RouteObject[] = [
   {
     path: '/',
@@ -34,6 +38,15 @@ const staticRoutes: RouteObject[] = [
             <SmoothLink to="/nested/1" prefetch="render"> nested-1 </SmoothLink>
             <SmoothLink to="/intent" prefetch="intent"> intent </SmoothLink>
             <SmoothLink to="/no-key" prefetch="intent"> no-key </SmoothLink>
+            <SmoothLink
+              to="/custom-prefetch"
+              prefetch="intent"
+              prefetchOptions={{
+                onPrefetch,
+              }}
+            >
+              custom-prefetch
+            </SmoothLink>
           </div>
           <SmoothLink to="/viewport" prefetch="viewport"> viewport </SmoothLink>
         </div>
@@ -70,6 +83,10 @@ const staticRoutes: RouteObject[] = [
       {
         path: 'no-key',
         lazy: () => import('./no-key/index'),
+      },
+      {
+        path: 'custom-prefetch',
+        lazy: () => import('./custom-prefetch/index'),
       },
     ],
   },
