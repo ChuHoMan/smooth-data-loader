@@ -1,5 +1,5 @@
 import { forwardRef, memo } from 'react';
-import { Link, LinkProps, useHref } from 'react-router-dom';
+import { Link, LinkProps, matchRoutes, useHref } from 'react-router-dom';
 import { usePrefetch } from './hooks/usePrefetch';
 import PrefetchPageLinks from './PrefetchPageLinks';
 
@@ -13,9 +13,16 @@ import PrefetchPageLinks from './PrefetchPageLinks';
  */
 type PrefetchBehavior = 'intent' | 'render' | 'none' | 'viewport';
 
-export interface MisxLinkProps extends LinkProps {
+type RouteType = NonNullable<ReturnType<typeof matchRoutes>>[number];
+
+export interface SmoothLinkProps extends LinkProps {
   prefetch?: PrefetchBehavior
-  prefetchOptions?: Record<string, any>
+  prefetchOptions?: {
+    /**
+     * Triggered on prefetch
+     */
+    onPrefetch?(route: RouteType): Promise<void>
+  }
 }
 
 const ABSOLUTE_URL_REGEX = /^(?:[a-z][a-z0-9+.-]*:|\/\/)/i;
@@ -32,7 +39,7 @@ function mergeRefs<T = any>(...refs: Array<React.MutableRefObject<T> | React.Leg
   };
 }
 
-const SmoothLink = forwardRef<HTMLAnchorElement, MisxLinkProps>((props, forwardedRef) => {
+const SmoothLink = forwardRef<HTMLAnchorElement, SmoothLinkProps>((props, forwardedRef) => {
   const { to, prefetch = 'none', prefetchOptions, ...restProps } = props;
   const isAbsolute = typeof to === 'string' && ABSOLUTE_URL_REGEX.test(to);
 
